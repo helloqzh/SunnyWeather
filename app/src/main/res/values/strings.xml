@@ -2,4 +2,14 @@
     <string name="app_name">SunnyWeather</string>
     <string name="place_hint">Input city</string>
     <string name="city_not_found">Could not find any city</string>
+    <string name="error_request">response body is null</string>
+    <string name="error_get_weather">Unable to get weather information</string>
+    <string name="label_forecast">Forecast</string>
+    <string name="label_living_index">Living Index</string>
+    <string name="label_living_index_UV">UV</string>
+    <string name="label_living_index_CAR">Carwash</string>
+    <string name="label_living_index_DRESS">Dressing</string>
+    <string name="label_living_index_COLD">Cold</string>
+    <string name="label_AQI">Air Quality</string>
+    <string name="label_separate">|</string>
 </resources>

@@ -51,8 +51,16 @@ class WeatherActivity : AppCompatActivity() {
                 Toast.makeText(this, R.string.error_get_weather, Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()
             }
+            binding.refreshLayout.isRefreshing = false
         })
+        binding.refreshLayout.setColorSchemeResources(R.color.teal_200)
+        refreshWeather()
+        binding.refreshLayout.setOnRefreshListener { refreshWeather() }
+    }
+
+    fun refreshWeather() {
         viewModel.refreshWeather(viewModel.currentCity!!)
+        binding.refreshLayout.isRefreshing = true
     }
 
     private fun showWeatherInfo(weather: Weather) {

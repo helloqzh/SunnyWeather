@@ -1,6 +1,7 @@
 package com.helloqzh.android.logic
 
 import androidx.lifecycle.liveData
+import com.helloqzh.android.logic.dao.SharedCityDao
 import com.helloqzh.android.logic.model.City
 import com.helloqzh.android.logic.model.Weather
 import com.helloqzh.android.logic.network.SunnyWeatherNetwork
@@ -34,6 +35,12 @@ object WeatherRepository {
             }
         }
     }
+
+    fun saveCity(city: City) = SharedCityDao.saveCity(city)
+
+    fun getSavedCity() = SharedCityDao.getSavedCity()
+
+    fun isCitySaved() = SharedCityDao.isCitySaved()
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>)
     = liveData<Result<T>>(context) {

@@ -1,5 +1,6 @@
 package com.helloqzh.android.ui.city
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.helloqzh.android.R
 import com.helloqzh.android.databinding.FragmentCityBinding
+import com.helloqzh.android.logic.model.City
+import com.helloqzh.android.ui.weather.WeatherActivity
 import com.jakewharton.rxbinding4.widget.afterTextChangeEvents
 import java.util.concurrent.TimeUnit
 
@@ -21,6 +25,7 @@ class CityFragment : Fragment() {
 
     private var _binding: FragmentCityBinding? = null;
     private val binding get() = _binding!!
+    private val gson = Gson()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +38,11 @@ class CityFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        if(viewModel.isCitySaved()) {
+            val city = viewModel.getSavedCity()
+            startWeatherActivity(city)
+            return
+        }
         val layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.layoutManager = layoutManager
         adapter = CityAdapter(this, viewModel.cityList)
@@ -68,5 +78,15 @@ class CityFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun startWeatherActivity(city: City, withSaveAction: Boolean = false) {
+        val intent = Intent(context, WeatherActivity::class.java)
+                .putExtra(WeatherActivity.INTENT_CITY, gson.toJson(city))
+        if (withSaveAction) {
+            viewModel.saveCity(city)
+        }
+        startActivity(intent)
+        activity?.finish()
     }
 }

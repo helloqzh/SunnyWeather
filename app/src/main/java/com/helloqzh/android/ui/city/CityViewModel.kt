@@ -3,6 +3,7 @@ package com.helloqzh.android.ui.city
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.helloqzh.android.logic.WeatherRepository
 import com.helloqzh.android.logic.dao.AppDatabase
 import com.helloqzh.android.logic.model.City
 
@@ -19,4 +20,10 @@ class CityViewModel : ViewModel() {
     fun searchCities(query: String) {
         searchLiveData.value = query
     }
+
+    fun saveCity(city: City) = WeatherRepository.saveCity(city)
+
+    fun getSavedCity() = WeatherRepository.getSavedCity()
+
+    fun isCitySaved() = WeatherRepository.isCitySaved()
 }

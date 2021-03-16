@@ -12,7 +12,7 @@ import com.helloqzh.android.R
 import com.helloqzh.android.logic.model.City
 import com.helloqzh.android.ui.weather.WeatherActivity
 
-class CityAdapter(private val fragment: Fragment, private val cityList: List<City>) :
+class CityAdapter(private val fragment: CityFragment, private val cityList: List<City>) :
     RecyclerView.Adapter<CityAdapter.ViewHolder>() {
 
     private val gson = Gson()
@@ -28,9 +28,7 @@ class CityAdapter(private val fragment: Fragment, private val cityList: List<Cit
         holder.itemView.setOnClickListener{
             val position = holder.adapterPosition
             val city = cityList[position]
-            val intent = Intent(parent.context, WeatherActivity::class.java)
-                    .putExtra(WeatherActivity.INTENT_CITY, gson.toJson(city))
-            fragment.startActivity(intent)
+            fragment.startWeatherActivity(city, true)
         }
         return holder
     }

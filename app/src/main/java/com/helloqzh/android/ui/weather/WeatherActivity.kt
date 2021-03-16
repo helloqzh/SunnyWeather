@@ -24,6 +24,7 @@ class WeatherActivity : AppCompatActivity() {
 
     companion object {
         val INTENT_CITY = "SELECTED_CITY"
+        private val gson = Gson()
     }
 
     val viewModel by lazy { ViewModelProvider(this).get(WeatherViewModel::class.java) }
@@ -39,7 +40,7 @@ class WeatherActivity : AppCompatActivity() {
         if (viewModel.currentCity == null) {
             val cityJsonStr = intent.getStringExtra(INTENT_CITY)
             if (!cityJsonStr.isNullOrEmpty()) {
-                viewModel.currentCity = Gson().fromJson(cityJsonStr, City::class.java)
+                viewModel.currentCity = gson.fromJson(cityJsonStr, City::class.java)
             }
         }
         viewModel.weatherLivedata.observe(this, Observer { result ->

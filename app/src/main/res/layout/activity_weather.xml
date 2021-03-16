@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/weatherLayout"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:visibility="invisible">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <include layout="@layout/now" android:id="@+id/now"/>
+                <include layout="@layout/forecast" android:id="@+id/forecase"/>
+                <include layout="@layout/life_index" android:id="@+id/lifeIndex"/>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/weatherLayout"
-        android:scrollbars="none"
-        android:overScrollMode="never"
-        android:visibility="invisible">
-        <LinearLayout
+        android:layout_gravity="start"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/colorPrimary">
+        <fragment
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <include layout="@layout/now" android:id="@+id/now"/>
-            <include layout="@layout/forecast" android:id="@+id/forecase"/>
-            <include layout="@layout/life_index" android:id="@+id/lifeIndex"/>
-        </LinearLayout>
-    </ScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent"
+            android:id="@+id/cityFragment"
+            android:name="com.helloqzh.android.ui.city.CityFragment"
+            android:layout_marginTop="25dp"/>
+    </FrameLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

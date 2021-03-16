@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
+import com.helloqzh.android.MainActivity
 import com.helloqzh.android.R
 import com.helloqzh.android.databinding.FragmentCityBinding
 import com.helloqzh.android.logic.model.City
@@ -38,7 +39,7 @@ class CityFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if(viewModel.isCitySaved()) {
+        if(activity is MainActivity && viewModel.isCitySaved()) {
             val city = viewModel.getSavedCity()
             startWeatherActivity(city)
             return
@@ -80,12 +81,9 @@ class CityFragment : Fragment() {
         _binding = null
     }
 
-    fun startWeatherActivity(city: City, withSaveAction: Boolean = false) {
+    fun startWeatherActivity(city: City) {
         val intent = Intent(context, WeatherActivity::class.java)
                 .putExtra(WeatherActivity.INTENT_CITY, gson.toJson(city))
-        if (withSaveAction) {
-            viewModel.saveCity(city)
-        }
         startActivity(intent)
         activity?.finish()
     }

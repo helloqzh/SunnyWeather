@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.helloqzh.android.MainActivity
 import com.helloqzh.android.R
 import com.helloqzh.android.logic.model.City
 import com.helloqzh.android.ui.weather.WeatherActivity
@@ -28,7 +29,14 @@ class CityAdapter(private val fragment: CityFragment, private val cityList: List
         holder.itemView.setOnClickListener{
             val position = holder.adapterPosition
             val city = cityList[position]
-            fragment.startWeatherActivity(city, true)
+            val activity = fragment.activity
+            if (activity is WeatherActivity) {
+                activity.viewModel.currentCity = city
+                activity.refreshWeather()
+            } else {
+                fragment.startWeatherActivity(city)
+            }
+            fragment.viewModel.saveCity(city)
         }
         return holder
     }

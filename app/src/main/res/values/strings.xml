@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SunnyWeather</string>
+    <string name="app_name">Weather</string>
     <string name="place_hint">Input city</string>
     <string name="city_not_found">Could not find any city</string>
     <string name="error_request">response body is null</string>

@@ -12,4 +12,5 @@
     <string name="label_living_index_COLD">Cold</string>
     <string name="label_AQI">Air Quality</string>
     <string name="label_separate">|</string>
+    <string name="settings">Settings</string>
 </resources>

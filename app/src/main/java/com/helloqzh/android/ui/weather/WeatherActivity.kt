@@ -1,6 +1,7 @@
 package com.helloqzh.android.ui.weather
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -22,6 +23,7 @@ import com.helloqzh.android.databinding.ActivityWeatherBinding
 import com.helloqzh.android.logic.model.City
 import com.helloqzh.android.logic.model.Weather
 import com.helloqzh.android.logic.model.getSky
+import com.helloqzh.android.ui.settings.SettingsActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,6 +40,7 @@ class WeatherActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val decorView = window.decorView
+        @Suppress("DEPRECATION")
         decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         window.statusBarColor = Color.TRANSPARENT
         binding = ActivityWeatherBinding.inflate(layoutInflater)
@@ -51,6 +54,10 @@ class WeatherActivity : AppCompatActivity() {
         binding.drawerLayout.closeDrawers()
         binding.now.navBtn.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
+        }
+        binding.now.navSettings.setOnClickListener {
+            val settingsIntent = Intent(this, SettingsActivity::class.java)
+            startActivity(settingsIntent)
         }
         binding.drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}

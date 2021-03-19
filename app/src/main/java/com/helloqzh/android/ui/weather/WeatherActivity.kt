@@ -20,6 +20,7 @@ import com.google.gson.Gson
 import com.helloqzh.android.R
 import com.helloqzh.android.SunnyWeatherApplication
 import com.helloqzh.android.databinding.ActivityWeatherBinding
+import com.helloqzh.android.logic.dao.LanguageDao.setLanguage
 import com.helloqzh.android.logic.model.City
 import com.helloqzh.android.logic.model.Weather
 import com.helloqzh.android.logic.model.getSky
@@ -39,6 +40,7 @@ class WeatherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setLanguage()
         val decorView = window.decorView
         @Suppress("DEPRECATION")
         decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -104,7 +106,7 @@ class WeatherActivity : AppCompatActivity() {
             val currentTempText = "${realtime.temperature.toInt()} ℃"
             this.currentTemp.text = currentTempText
             this.currentSky.text = getSky(realtime.skycon, viewModel.getLanguage()).info
-            val currentPM25Text = "${SunnyWeatherApplication.getString(R.string.label_AQI)} ${realtime.airQuality.aqi.chn.toInt()}"
+            val currentPM25Text = "${resources.getString(R.string.label_AQI)} ${realtime.airQuality.aqi.chn.toInt()}"
             this.currentAQI.text = currentPM25Text
             this.nowLayout.setBackgroundResource(getSky(realtime.skycon, viewModel.getLanguage()).bg)
         }

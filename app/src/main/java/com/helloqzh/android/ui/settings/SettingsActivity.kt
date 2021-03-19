@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.helloqzh.android.R
 import com.helloqzh.android.databinding.ActivitySettingsBinding
 import com.helloqzh.android.logic.dao.LanguageDao.getResourceString
+import com.helloqzh.android.logic.dao.LanguageDao.setLanguage
 import com.helloqzh.android.logic.model.Language
 
 class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeDialogListener {
@@ -20,6 +21,7 @@ class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeD
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setLanguage()
         selectedLang = viewModel.getSavedLanguage()
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)

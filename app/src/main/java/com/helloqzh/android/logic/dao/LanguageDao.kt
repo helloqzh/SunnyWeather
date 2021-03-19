@@ -1,6 +1,9 @@
 package com.helloqzh.android.logic.dao
 
+import android.app.Activity
 import android.content.Context
+import android.os.Build
+import android.os.LocaleList
 import com.google.gson.Gson
 import com.helloqzh.android.R
 import com.helloqzh.android.SunnyWeatherApplication
@@ -10,7 +13,6 @@ import java.util.*
 object LanguageDao {
     private const val SHARED_KEY = "sunny_weather"
     private const val SHARED_LANG_KEY = "language"
-    private val gson = Gson()
 
     fun saveLanguage(lang: Language) {
         sharedPreferences().edit().putString(SHARED_LANG_KEY, lang.name).apply()
@@ -65,5 +67,16 @@ object LanguageDao {
             Language.Japanese -> "ja"
             Language.Chinese -> "zh_CN"
         }
+    }
+
+    fun Activity.setLanguage(lang: Language? = null) {
+        val resources = this.resources
+        val config = resources.configuration
+        val newLocale = lang?.toLocale() ?: getSavedLanguage().toLocale()
+        config.setLocale(newLocale)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            config.setLocales(LocaleList(newLocale))
+        }
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 }

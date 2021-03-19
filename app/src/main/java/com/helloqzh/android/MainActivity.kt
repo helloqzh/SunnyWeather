@@ -1,11 +1,17 @@
 package com.helloqzh.android
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.helloqzh.android.databinding.ActivityMainBinding
+import com.helloqzh.android.logic.dao.LanguageDao
+import com.helloqzh.android.logic.dao.LanguageDao.setLanguage
+import com.helloqzh.android.logic.dao.LanguageDao.toLocale
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setSupportActionBar(binding.toolbar)
+        setLanguage()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

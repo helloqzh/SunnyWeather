@@ -79,16 +79,10 @@ private val skyJA = mapOf(
         "DUST" to Sky("汚染霧", R.drawable.ic_fog, R.drawable.bg_fog)
 )
 
-enum class LANG {
-    EN,
-    ZH,
-    JA
-}
-
-fun getSky(skycon: String, lang: LANG = LANG.EN): Sky {
+fun getSky(skycon: String, lang: Language): Sky {
     return when(lang) {
-        LANG.EN -> skyEN[skycon] ?: skyEN["CLEAR_DAY"]!!
-        LANG.ZH -> skyZH[skycon] ?: skyZH["CLEAR_DAY"]!!
-        LANG.JA -> skyJA[skycon] ?: skyJA["CLEAR_DAY"]!!
+        Language.English -> skyEN[skycon] ?: skyEN["CLEAR_DAY"]!!
+        Language.Chinese -> skyZH[skycon] ?: skyZH["CLEAR_DAY"]!!
+        Language.Japanese -> skyJA[skycon] ?: skyJA["CLEAR_DAY"]!!
     }
 }

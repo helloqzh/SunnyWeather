@@ -7,18 +7,20 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import com.helloqzh.android.R
 import com.helloqzh.android.databinding.ActivitySettingsBinding
+import com.helloqzh.android.logic.dao.LanguageDao.getResourceString
 import com.helloqzh.android.logic.model.Language
 
 class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeDialogListener {
-
+    val viewModel by lazy { ViewModelProvider(this).get(SettingsViewModel::class.java) }
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var selectedLang: Language
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        selectedLang = Language.English
+        selectedLang = viewModel.getSavedLanguage()
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.settingsToolbar)
@@ -26,9 +28,15 @@ class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeD
             it.setDisplayHomeAsUpEnabled(true)
             it.setHomeButtonEnabled(true)
         }
-
+        binding.settingsSelectedLang.text = selectedLang.getResourceString()
         binding.settingsLangLayout.setOnClickListener {
             LangSettingsDialogFragment(selectedLang).show(supportFragmentManager, "lang")
+        }
+
+        viewModel.languageLiveData.observe(this) {
+            viewModel.saveLanguage(it)
+            binding.settingsSelectedLang.text = selectedLang.getResourceString()
+            Toast.makeText(this, "save language.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -50,6 +58,6 @@ class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeD
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment) {
-        Toast.makeText(this, "Current Selected Language:" + selectedLang, Toast.LENGTH_SHORT).show()
+        viewModel.setLanguage(selectedLang)
     }
 }

@@ -33,7 +33,7 @@
             android:textSize="15sp"
             android:layout_marginStart="10dp"
             android:text="@string/lang_en"
-            android:id="@+id/settings_selected_lang"/>
+            android:id="@+id/settingsSelectedLang"/>
     </LinearLayout>
 
 </LinearLayout>

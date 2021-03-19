@@ -1,8 +1,10 @@
 package com.helloqzh.android.logic
 
 import androidx.lifecycle.liveData
+import com.helloqzh.android.logic.dao.LanguageDao
 import com.helloqzh.android.logic.dao.SharedCityDao
 import com.helloqzh.android.logic.model.City
+import com.helloqzh.android.logic.model.Language
 import com.helloqzh.android.logic.model.Weather
 import com.helloqzh.android.logic.network.SunnyWeatherNetwork
 import kotlinx.coroutines.Dispatchers
@@ -15,10 +17,10 @@ object WeatherRepository {
     fun refreshWeather(city: City) = fire(Dispatchers.IO) {
         coroutineScope {
             val deferredRealtime = async {
-                SunnyWeatherNetwork.getRealtimeWeather(city)
+                SunnyWeatherNetwork.getRealtimeWeather(city, getSavedLanguage())
             }
             val deferredDaily = async {
-                SunnyWeatherNetwork.getDailyWeather(city)
+                SunnyWeatherNetwork.getDailyWeather(city, getSavedLanguage())
             }
             val realtimeResponse = deferredRealtime.await()
             val dailyResponse = deferredDaily.await()
@@ -41,6 +43,10 @@ object WeatherRepository {
     fun getSavedCity() = SharedCityDao.getSavedCity()
 
     fun isCitySaved() = SharedCityDao.isCitySaved()
+
+    fun saveLanguage(lang: Language) = LanguageDao.saveLanguage(lang)
+
+    fun getSavedLanguage() = LanguageDao.getSavedLanguage()
 
     private fun <T> fire(context: CoroutineContext, block: suspend () -> Result<T>)
     = liveData<Result<T>>(context) {

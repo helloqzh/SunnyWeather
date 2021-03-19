@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">天気</string>
+    <string name="place_hint">市区町村</string>
+    <string name="city_not_found">０件見つかりました</string>
+    <string name="error_request">サーバーエラー</string>
+    <string name="error_get_weather">天気情報取得失敗されていました</string>
+    <string name="label_forecast">天気予報</string>
+    <string name="label_living_index">お役立ち情報</string>
+    <string name="label_living_index_UV">紫外線</string>
+    <string name="label_living_index_CAR">洗車</string>
+    <string name="label_living_index_DRESS">洗濯</string>
+    <string name="label_living_index_COLD">風邪ひき</string>
+    <string name="label_AQI">空気品質</string>
+    <string name="label_separate">|</string>
+    <string name="settings">設定</string>
+    <string name="settings_lang">言語</string>
+    <string name="lang_en">英語</string>
+    <string name="lang_ja">日本語</string>
+    <string name="lang_zh">中国語</string>
+    <string name="dialog_confirm">確認</string>
+    <string name="dialog_cancel">キャンセル</string>
+</resources>

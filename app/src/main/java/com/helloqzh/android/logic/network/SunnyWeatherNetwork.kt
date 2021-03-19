@@ -2,7 +2,9 @@ package com.helloqzh.android.logic.network
 
 import com.helloqzh.android.R
 import com.helloqzh.android.SunnyWeatherApplication
+import com.helloqzh.android.logic.dao.LanguageDao.valueOfApiParameter
 import com.helloqzh.android.logic.model.City
+import com.helloqzh.android.logic.model.Language
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,9 +17,9 @@ object SunnyWeatherNetwork {
 
     private val weatherService = ServiceCreator.create<WeatherService>()
 
-    suspend fun getDailyWeather(city: City) = weatherService.getDailyWeather(city.lng, city.lat).await()
+    suspend fun getDailyWeather(city: City, lang: Language) = weatherService.getDailyWeather(city.lng, city.lat, lang.valueOfApiParameter()).await()
 
-    suspend fun getRealtimeWeather(city: City) = weatherService.getRealtimeWeather(city.lng, city.lat).await()
+    suspend fun getRealtimeWeather(city: City, lang: Language) = weatherService.getRealtimeWeather(city.lng, city.lat, lang.valueOfApiParameter()).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->

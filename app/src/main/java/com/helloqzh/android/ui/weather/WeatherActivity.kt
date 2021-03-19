@@ -103,10 +103,10 @@ class WeatherActivity : AppCompatActivity() {
         with(binding.now) {
             val currentTempText = "${realtime.temperature.toInt()} ℃"
             this.currentTemp.text = currentTempText
-            this.currentSky.text = getSky(realtime.skycon).info
+            this.currentSky.text = getSky(realtime.skycon, viewModel.getLanguage()).info
             val currentPM25Text = "${SunnyWeatherApplication.getString(R.string.label_AQI)} ${realtime.airQuality.aqi.chn.toInt()}"
             this.currentAQI.text = currentPM25Text
-            this.nowLayout.setBackgroundResource(getSky(realtime.skycon).bg)
+            this.nowLayout.setBackgroundResource(getSky(realtime.skycon, viewModel.getLanguage()).bg)
         }
 
         // forecase.xml
@@ -124,7 +124,7 @@ class WeatherActivity : AppCompatActivity() {
                 val temperatureInfo = view.findViewById<TextView>(R.id.temperatureInfo)
                 val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 dateInfo.text = simpleDateFormat.format(skycon.date)
-                val sky = getSky(skycon.value)
+                val sky = getSky(skycon.value, viewModel.getLanguage())
                 skyIcon.setImageResource(sky.icon)
                 skyInfo.text = sky.info
                 val tempText = "${temperature.min.toInt()} ~ ${temperature.max.toInt()} ℃"

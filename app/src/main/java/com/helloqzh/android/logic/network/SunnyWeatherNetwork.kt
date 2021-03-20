@@ -28,7 +28,7 @@ object SunnyWeatherNetwork {
                     val body = response.body()
                     if (body != null) continuation.resume(body)
                     else continuation.resumeWithException(
-                            RuntimeException(SunnyWeatherApplication.getString(R.string.error_request))
+                            RuntimeException(SunnyWeatherApplication.context.getString(R.string.error_request))
                     )
                 }
 

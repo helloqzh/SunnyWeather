@@ -4,25 +4,20 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.RadioButton
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import com.helloqzh.android.R
 import com.helloqzh.android.databinding.ActivitySettingsBinding
 import com.helloqzh.android.logic.dao.LanguageDao.getResourceString
-import com.helloqzh.android.logic.dao.LanguageDao.setLanguage
 import com.helloqzh.android.logic.model.Language
+import com.helloqzh.android.ui.base.BaseActivity
 
-class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeDialogListener {
-    val viewModel by lazy { ViewModelProvider(this).get(SettingsViewModel::class.java) }
+class SettingsActivity : BaseActivity(), LangSettingsDialogFragment.NoticeDialogListener {
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var selectedLang: Language
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setLanguage()
-        selectedLang = viewModel.getSavedLanguage()
+        selectedLang = baseViewModel.getSavedLanguage()
         binding = ActivitySettingsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.settingsToolbar)
@@ -33,12 +28,6 @@ class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeD
         binding.settingsSelectedLang.text = selectedLang.getResourceString()
         binding.settingsLangLayout.setOnClickListener {
             LangSettingsDialogFragment(selectedLang).show(supportFragmentManager, "lang")
-        }
-
-        viewModel.languageLiveData.observe(this) {
-            viewModel.saveLanguage(it)
-            binding.settingsSelectedLang.text = selectedLang.getResourceString()
-            Toast.makeText(this, "save language.", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -60,6 +49,7 @@ class SettingsActivity : AppCompatActivity(), LangSettingsDialogFragment.NoticeD
     }
 
     override fun onDialogPositiveClick(dialog: DialogFragment) {
-        viewModel.setLanguage(selectedLang)
+        baseViewModel.saveLanguage(selectedLang)
+        baseViewModel.updateUILanguage(selectedLang)
     }
 }

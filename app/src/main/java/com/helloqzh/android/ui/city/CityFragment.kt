@@ -85,6 +85,6 @@ class CityFragment : Fragment() {
         val intent = Intent(context, WeatherActivity::class.java)
                 .putExtra(WeatherActivity.INTENT_CITY, gson.toJson(city))
         startActivity(intent)
-        activity?.finish()
+        // activity?.finish()
     }
 }

@@ -6,9 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
-import android.widget.TextView
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
 import com.helloqzh.android.R
 import com.helloqzh.android.logic.model.Language
 
@@ -27,7 +25,8 @@ class LangSettingsDialogFragment(private val initLang: Language) : DialogFragmen
             val inflater = requireActivity().layoutInflater
             val settingsLangView = inflater.inflate(R.layout.settings_lang, null)
             setInitLang(settingsLangView)
-            builder.setView(settingsLangView)
+            builder.setTitle(R.string.settings_lang)
+                .setView(settingsLangView)
                 .setPositiveButton(R.string.dialog_confirm) { _, _ ->
                     listener.onDialogPositiveClick(this)
                 }

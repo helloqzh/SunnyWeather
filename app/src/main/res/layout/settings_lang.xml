@@ -12,12 +12,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onLangRadioClicked"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             android:text="@string/lang_en" />
 
         <RadioButton
             android:id="@+id/settings_lang_ja"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             android:onClick="onLangRadioClicked"
             android:text="@string/lang_ja" />
 
@@ -25,6 +29,8 @@
             android:id="@+id/settings_lang_zh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             android:onClick="onLangRadioClicked"
             android:text="@string/lang_zh" />
     </RadioGroup>

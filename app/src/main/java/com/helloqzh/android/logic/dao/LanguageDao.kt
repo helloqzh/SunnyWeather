@@ -1,10 +1,8 @@
 package com.helloqzh.android.logic.dao
 
-import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.os.LocaleList
-import com.google.gson.Gson
 import com.helloqzh.android.R
 import com.helloqzh.android.SunnyWeatherApplication
 import com.helloqzh.android.logic.model.Language
@@ -30,9 +28,7 @@ object LanguageDao {
     private fun getDeviceLanguage(): Language {
         val lang = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             SunnyWeatherApplication.context.resources.configuration.locales[0].toLang()
-        } else {
-            SunnyWeatherApplication.context.resources.configuration.locale.toLang()
-        }
+        } else SunnyWeatherApplication.context.resources.configuration.locale.toLang()
         saveLanguage(lang)
         return lang
     }
@@ -55,9 +51,9 @@ object LanguageDao {
 
     fun Language.getResourceString(): String {
         return when(this) {
-            Language.Chinese -> SunnyWeatherApplication.getString(R.string.lang_zh)
-            Language.Japanese -> SunnyWeatherApplication.getString(R.string.lang_ja)
-            Language.English -> SunnyWeatherApplication.getString(R.string.lang_en)
+            Language.Chinese -> SunnyWeatherApplication.getResourceString(R.string.lang_zh)
+            Language.Japanese -> SunnyWeatherApplication.getResourceString(R.string.lang_ja)
+            Language.English -> SunnyWeatherApplication.getResourceString(R.string.lang_en)
         }
     }
 
@@ -69,10 +65,11 @@ object LanguageDao {
         }
     }
 
-    fun Activity.setLanguage(lang: Language? = null) {
+    fun Context.setLanguage(language: Language? = null) {
         val resources = this.resources
         val config = resources.configuration
-        val newLocale = lang?.toLocale() ?: getSavedLanguage().toLocale()
+        val lang = language ?: getSavedLanguage()
+        val newLocale = lang.toLocale()
         config.setLocale(newLocale)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             config.setLocales(LocaleList(newLocale))

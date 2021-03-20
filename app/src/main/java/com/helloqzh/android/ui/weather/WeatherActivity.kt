@@ -140,6 +140,9 @@ class WeatherActivity : BaseActivity() {
             this.dressingText.text = lifeIndex.dressing[0].desc
             this.ultravioletText.text = lifeIndex.ultraviolet[0].desc
             this.carWashingText.text = lifeIndex.carWashing[0].desc
+            this.pm25Text.text = realtime.airQuality.pm25.toString()
+            val humidity = "${realtime.humidity * 100}%"
+            this.humidityText.text = humidity
         }
 
         binding.weatherLayout.visibility = View.VISIBLE

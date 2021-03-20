@@ -11,6 +11,8 @@
     <string name="label_living_index_DRESS">穿衣</string>
     <string name="label_living_index_COLD">感冒</string>
     <string name="label_AQI">空气指数</string>
+    <string name="label_PM25">PM 2.5</string>
+    <string name="label_humidity">湿度</string>
     <string name="label_separate">|</string>
     <string name="label_last_update_time">上次更新时间</string>
     <string name="settings">设置</string>

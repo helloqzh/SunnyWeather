@@ -11,6 +11,8 @@
     <string name="label_living_index_DRESS">Dressing</string>
     <string name="label_living_index_COLD">Cold</string>
     <string name="label_AQI">Air Quality</string>
+    <string name="label_PM25">PM 2.5</string>
+    <string name="label_humidity">Humidity</string>
     <string name="label_separate">|</string>
     <string name="label_last_update_time">Last update time</string>
     <string name="settings">Settings</string>

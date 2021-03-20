@@ -11,6 +11,8 @@
     <string name="label_living_index_DRESS">洗濯</string>
     <string name="label_living_index_COLD">風邪ひき</string>
     <string name="label_AQI">空気品質</string>
+    <string name="label_PM25">PM 2.5</string>
+    <string name="label_humidity">湿度</string>
     <string name="label_separate">|</string>
     <string name="label_last_update_time">前回更新時間</string>
     <string name="settings">設定</string>

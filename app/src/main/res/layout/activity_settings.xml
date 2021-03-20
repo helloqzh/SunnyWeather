@@ -34,6 +34,12 @@
             android:layout_marginStart="10dp"
             android:text="@string/lang_en"
             android:id="@+id/settingsSelectedLang"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="5dp"
+            android:background="#DEDEDE" />
     </LinearLayout>
 
 </LinearLayout>

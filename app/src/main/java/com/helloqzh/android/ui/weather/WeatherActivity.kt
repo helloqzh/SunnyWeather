@@ -79,6 +79,8 @@ class WeatherActivity : BaseActivity() {
                 Toast.makeText(this, R.string.error_get_weather, Toast.LENGTH_SHORT).show()
                 result.exceptionOrNull()?.printStackTrace()
             }
+            val simpleDateFormat = SimpleDateFormat("HH:mm", resources.configuration.locale!!)
+            binding.now.lastUpdateTime.text = simpleDateFormat.format(viewModel.lastUpdateTime)
             binding.refreshLayout.isRefreshing = false
         })
         binding.refreshLayout.setColorSchemeResources(R.color.colorPrimary)
@@ -120,7 +122,7 @@ class WeatherActivity : BaseActivity() {
                 val skyIcon = view.findViewById<ImageView>(R.id.skyIcon)
                 val skyInfo = view.findViewById<TextView>(R.id.skyInfo)
                 val temperatureInfo = view.findViewById<TextView>(R.id.temperatureInfo)
-                val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val simpleDateFormat = SimpleDateFormat("MM-dd(E)", resources.configuration.locale!!)
                 dateInfo.text = simpleDateFormat.format(skycon.date)
                 val sky = getSky(skycon.value, viewModel.getLanguage())
                 skyIcon.setImageResource(sky.icon)

@@ -17,9 +17,9 @@ object SunnyWeatherNetwork {
 
     private val weatherService = ServiceCreator.create<WeatherService>()
 
-    suspend fun getDailyWeather(city: City, lang: Language) = weatherService.getDailyWeather(city.lng, city.lat, lang.valueOfApiParameter()).await()
+    suspend fun getDailyWeather(city: City, lang: Language) = weatherService.getDailyWeather(SunnyWeatherApplication.TOKEN, city.lng, city.lat, lang.valueOfApiParameter()).await()
 
-    suspend fun getRealtimeWeather(city: City, lang: Language) = weatherService.getRealtimeWeather(city.lng, city.lat, lang.valueOfApiParameter()).await()
+    suspend fun getRealtimeWeather(city: City, lang: Language) = weatherService.getRealtimeWeather(SunnyWeatherApplication.TOKEN, city.lng, city.lat, lang.valueOfApiParameter()).await()
 
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->

@@ -15,7 +15,7 @@ bin/
 gen/
 out/
 #  Uncomment the following line in case you need and you don't have the release build type files in your app
-# release/
+release/
 
 # Gradle files
 .gradle/
@@ -84,6 +84,6 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-app/src/main/assets/api.properties
-
-gradle.properties
+# api TOKEN
+# https://dashboard.caiyunapp.com
+app/src/main/assets/TOKEN

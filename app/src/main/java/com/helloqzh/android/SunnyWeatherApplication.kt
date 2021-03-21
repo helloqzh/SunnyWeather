@@ -11,7 +11,7 @@ class SunnyWeatherApplication : Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
-        const val TOKEN: String = "F6FpeVaXQXs9T3A9"
+        lateinit var TOKEN: String
         fun getResourceString(resourceId: Int) = context.resources.getString(resourceId)
     }
 
@@ -19,5 +19,6 @@ class SunnyWeatherApplication : Application() {
         super.onCreate()
         context = applicationContext
         context.setLanguage(LanguageDao.getSavedLanguage())
+        TOKEN = context.assets.open("TOKEN").bufferedReader().use { it.readText() }
     }
 }

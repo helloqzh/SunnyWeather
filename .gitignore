@@ -85,3 +85,5 @@ lint/tmp/
 # lint/reports/
 
 app/src/main/assets/api.properties
+
+gradle.properties

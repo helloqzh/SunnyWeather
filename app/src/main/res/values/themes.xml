@@ -14,4 +14,5 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.SunnyWeather.Settings.ActionBar" parent="@style/ThemeOverlay.AppCompat.Light"/>
 </resources>
